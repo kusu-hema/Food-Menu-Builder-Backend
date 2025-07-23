@@ -21,7 +21,7 @@ const dotenv = require('dotenv'); // optional if you’re using .env
 const pool = new Pool({ // ✅ Instantiate using Pool
   user: 'postgres',
   host: 'localhost',
-  database: 'postgres',
+  database: 'Food',
   password: '984869',
   port: 5433, // use your correct port
 });

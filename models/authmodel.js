@@ -68,7 +68,7 @@ const pool = require('../config/dbconn');
 
 class UserModel {
   async getAllUsers() {
-    const query = 'SELECT * FROM hello';
+    const query = 'SELECT * FROM customers';
     const { rows } = await pool.query(query);
     return rows;
   }
