@@ -1,4 +1,4 @@
- const pool = require('../config/dbconn');
+const pool = require('../config/dbconn');
 
 class CategoryModel {
   async getAllCategories() {

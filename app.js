@@ -12,7 +12,7 @@ const categoriesRoutes = require("./routes/categoryroute");
 app.use(cors());
 app.use(bodyParser.json());
 
-// ✅ This is the critical line to serve images from the 'uploads' directory
+// This is the critical line to serve images from the 'uploads' directory
 app.use('/uploads', express.static('uploads'));
 
 // Base routes for your 'APIs'
@@ -27,5 +27,5 @@ app.get("/", (req, res) => {
 // Start the server
 const port = 4000;
 app.listen(port, () => {
-  console.log(`✅ Server is running on http://localhost:${port}`);
+  console.log(`Server is running on http://localhost:${port}`);
 });
