@@ -1,3 +1,57 @@
+const pool = require('../config/dbconn');
+
+class UserModel {
+  async getAllUsers() {
+    const query = 'SELECT * FROM customers';
+    const { rows } = await pool.query(query);
+    return rows;
+  }
+
+  async getUserById(id) {
+    const query = 'SELECT * FROM customers WHERE id = $1';
+    const { rows } = await pool.query(query, [id]);
+    return rows[0];
+  }
+
+  async createUser({ name, phone, start, end_date, type, location, status }) {
+    const query = `
+      INSERT INTO customers (name, phone, start, end_date, type, location, status)
+      VALUES ($1, $2, $3, $4, $5, $6, $7)
+      RETURNING *
+    `;
+    const values = [name, phone, start, end_date, type, location, status];
+    const { rows } = await pool.query(query, values);
+    return rows[0];
+  }
+
+  async updateUser(id, { name, phone, start, end_date, type, location, status }) {
+    const query = `
+      UPDATE customers
+      SET name = $1, phone = $2, start = $3, end_date = $4, type = $5, location = $6, status = $7
+      WHERE id = $8
+      RETURNING *
+    `;
+    const values = [name, phone, start, end_date, type, location, status, id];
+    const { rows } = await pool.query(query, values);
+    return rows[0];
+  }
+
+  async deleteUser(id) {
+    const query = 'DELETE FROM customers WHERE id = $1';
+    await pool.query(query, [id]);
+    return true;
+  }
+}
+
+module.exports = new UserModel();
+
+
+
+
+
+
+
+
 // // const pool = require('../config/dbconn');
 // // class usermodle
 // //  {
@@ -62,51 +116,3 @@
 // })();
 
 // module.exports = new usermodle();
-
-
-const pool = require('../config/dbconn');
-
-class UserModel {
-  async getAllUsers() {
-    const query = 'SELECT * FROM customers';
-    const { rows } = await pool.query(query);
-    return rows;
-  }
-
-  async getUserById(id) {
-    const query = 'SELECT * FROM customers WHERE id = $1';
-    const { rows } = await pool.query(query, [id]);
-    return rows[0];
-  }
-
-  async createUser({ name, phone, start, end_date, type, location, status }) {
-    const query = `
-      INSERT INTO customers (name, phone, start, end_date, type, location, status)
-      VALUES ($1, $2, $3, $4, $5, $6, $7)
-      RETURNING *
-    `;
-    const values = [name, phone, start, end_date, type, location, status];
-    const { rows } = await pool.query(query, values);
-    return rows[0];
-  }
-
-  async updateUser(id, { name, phone, start, end_date, type, location, status }) {
-    const query = `
-      UPDATE customers
-      SET name = $1, phone = $2, start = $3, end_date = $4, type = $5, location = $6, status = $7
-      WHERE id = $8
-      RETURNING *
-    `;
-    const values = [name, phone, start, end_date, type, location, status, id];
-    const { rows } = await pool.query(query, values);
-    return rows[0];
-  }
-
-  async deleteUser(id) {
-    const query = 'DELETE FROM customers WHERE id = $1';
-    await pool.query(query, [id]);
-    return true;
-  }
-}
-
-module.exports = new UserModel();
