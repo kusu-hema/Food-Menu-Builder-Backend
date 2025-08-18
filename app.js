@@ -6,16 +6,17 @@ const bodyParser = require("body-parser");
 
 const app = express();
 const customerRoutes = require("./routes/authroute");
-// ✅ Correct import statement for your categories router.
 const categoriesRoutes = require("./routes/categoryroute");
 
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
 
+// ✅ This is the critical line to serve images from the 'uploads' directory
+app.use('/uploads', express.static('uploads'));
+
 // Base routes for your 'APIs'
 app.use('/api/customers', customerRoutes);
-// ✅ Correctly mount the categories router to its base path.
 app.use('/api/categories', categoriesRoutes);
 
 // Health check route (optional)
