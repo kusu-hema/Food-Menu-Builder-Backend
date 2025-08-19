@@ -3,10 +3,10 @@
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-
+                                                              
 const app = express();
 const customerRoutes = require("./routes/authroute");
-const categoriesRoutes = require("./routes/categoryroute");
+const categoriesRoutes = require("./routes/addproductroute");
 
 // Middleware
 app.use(cors());
@@ -17,7 +17,7 @@ app.use('/uploads', express.static('uploads'));
 
 // Base routes for your 'APIs'
 app.use('/api/customers', customerRoutes);
-app.use('/api/categories', categoriesRoutes);
+app.use('/api/products', categoriesRoutes);
 
 // Health check route (optional)
 app.get("/", (req, res) => {
