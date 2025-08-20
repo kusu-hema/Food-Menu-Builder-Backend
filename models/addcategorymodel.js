@@ -1,25 +1,21 @@
 const pool = require('../config/dbconn');
 
-// Renamed the class from CategoryModel to ProductModel
-class ProductModel {
-  // Renamed the method to getAllProducts
-  async getAllProducts() {
+class CategoryModel {
+  async getAllCategories() {
     // Select all columns from the new table schema
     const query = 'SELECT * FROM products';
     const { rows } = await pool.query(query);
     return rows;
   }
 
-  // Renamed the method to getProductById
-  async getProductById(id) {
+  async getCategoryById(id) {
     // Select a single record by the primary key `sno`
     const query = 'SELECT * FROM products WHERE sno = $1';
     const { rows } = await pool.query(query, [id]);
     return rows[0];
   }
 
-  // Renamed the method to createProduct
-  async createProduct({ image, product, category, action }) {
+  async createCategory({ image, product, category, action }) {
     // Insert a new record using the new column names
     const query = `
       INSERT INTO products (image, product, category, action)
@@ -31,8 +27,7 @@ class ProductModel {
     return rows[0];
   }
 
-  // Renamed the method to updateProduct
-  async updateProduct(id, { image, product, category, action }) {
+  async updateCategory(id, { image, product, category, action }) {
     // Update a record using the new column names
     const query = `
       UPDATE products
@@ -45,8 +40,7 @@ class ProductModel {
     return rows[0];
   }
 
-  // Renamed the method to deleteProduct
-  async deleteProduct(id) {
+  async deleteCategory(id) {
     // Delete a record by `sno`
     const query = 'DELETE FROM products WHERE sno = $1;';
     await pool.query(query, [id]);
@@ -54,5 +48,4 @@ class ProductModel {
   }
 }
 
-// Updated the exported instance to use the new class name
-module.exports = new ProductModel();
+module.exports = new CategoryModel();

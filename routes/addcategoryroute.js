@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const controller = require('../controller/addproductcontroller');
+const controller = require('../controller/addcategorycontroller');
 const multer = require('multer');
 
 // Configure multer for file storage
@@ -17,15 +17,15 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-// Create a new product (POST) - now handles file upload
-router.post('/', upload.single('image'), controller.createProduct);
+// Create a new category (POST) - now handles file upload
+router.post('/', upload.single('image'), controller.createCategory);
 
-// ✅ Add the upload middleware to the PUT route to handle image uploads
-router.put('/:id', upload.single('image'), controller.updateProduct);
+//  Add the upload middleware to the PUT route to handle image uploads
+router.put('/:id', upload.single('image'), controller.updateCategory);
 
 // All other routes remain the same
-router.get('/', controller.getProducts);
-router.get('/:id', controller.getProductById);
-router.delete('/:id', controller.deleteProduct);
+router.get('/', controller.getCategories);
+router.get('/:id', controller.getCategoryById);
+router.delete('/:id', controller.deleteCategory);
 
 module.exports = router;

@@ -1,34 +1,34 @@
-// File: controllers/categoryController.js
+// File: controllers/productController.js
 
 const model = require('../models/addproductmodel');
 
-// Get all categories
-const getCategories = async (req, res) => {
+// Get all products
+const getProducts = async (req, res) => {
   try {
-    const categories = await model.getAllCategories();
-    res.status(200).json(categories);
+    const products = await model.getAllProducts();
+    res.status(200).json(products);
   } catch (err) {
-    console.error('Error fetching categories:', err);
+    console.error('Error fetching products:', err);
     res.status(500).json({ message: 'Internal Server Error' });
   }
 };
 
-// Get a single category by ID
-const getCategoryById = async (req, res) => {
+// Get a single product by ID
+const getProductById = async (req, res) => {
   try {
-    const category = await model.getCategoryById(req.params.id);
-    if (!category) {
-      return res.status(404).json({ message: 'Category not found' });
+    const product = await model.getProductById(req.params.id);
+    if (!product) {
+      return res.status(404).json({ message: 'Product not found' });
     }
-    res.status(200).json(category);
+    res.status(200).json(product);
   } catch (err) {
-    console.error('Error fetching category:', err);
+    console.error('Error fetching product:', err);
     res.status(500).json({ message: 'Internal Server Error' });
   }
 };
 
-// Create a new category
-const createCategory = async (req, res) => {
+// Create a new product
+const createProduct = async (req, res) => {
   try {
     const { product, category, action } = req.body;
     const imagePath = req.file ? req.file.path : null;
@@ -37,58 +37,58 @@ const createCategory = async (req, res) => {
       return res.status(400).json({ message: 'Product and Category are required.' });
     }
 
-    const newCategory = await model.createCategory({
+    const newProduct = await model.createProduct({
       image: imagePath,
       product,
       category,
       action
     });
 
-    res.status(201).json(newCategory);
+    res.status(201).json(newProduct);
   } catch (err) {
-    console.error('Error creating category:', err);
+    console.error('Error creating product:', err);
     res.status(500).json({ message: 'Internal Server Error' });
   }
 };
 
-// Update an existing category
-const updateCategory = async (req, res) => {
+// Update an existing product
+const updateProduct = async (req, res) => {
   try {
     const { product, category, action } = req.body;
     const imagePath = req.file ? req.file.path : null;
 
-    const updatedCategory = await model.updateCategory(req.params.id, {
+    const updatedProduct = await model.updateProduct(req.params.id, {
       image: imagePath,
       product,
       category,
       action
     });
     
-    if (!updatedCategory) {
-      return res.status(404).json({ message: 'Category not found' });
+    if (!updatedProduct) {
+      return res.status(404).json({ message: 'Product not found' });
     }
-    res.status(200).json(updatedCategory);
+    res.status(200).json(updatedProduct);
   } catch (err) {
-    console.error('Error updating category:', err);
+    console.error('Error updating product:', err);
     res.status(500).json({ message: 'Internal Server Error' });
   }
 };
 
-// Delete a category
-const deleteCategory = async (req, res) => {
+// Delete a product
+const deleteProduct = async (req, res) => {
   try {
-    await model.deleteCategory(req.params.id);
-    res.status(200).json({ message: 'Category deleted successfully' });
+    await model.deleteProduct(req.params.id);
+    res.status(200).json({ message: 'Product deleted successfully' });
   } catch (err) {
-    console.error('Error deleting category:', err);
+    console.error('Error deleting product:', err);
     res.status(500).json({ message: 'Internal Server Error' });
   }
 };
 
 module.exports = {
-  getCategories,
-  getCategoryById,
-  createCategory,
-  updateCategory,
-  deleteCategory,
+  getProducts,
+  getProductById,
+  createProduct,
+  updateProduct,
+  deleteProduct,
 };
