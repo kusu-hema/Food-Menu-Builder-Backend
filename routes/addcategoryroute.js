@@ -1,3 +1,4 @@
+// File: routes/categoryRoutes.js
 const express = require('express');
 const router = express.Router();
 const controller = require('../controller/addcategorycontroller');
@@ -5,14 +6,14 @@ const multer = require('multer');
 
 // Configure multer for file storage
 const storage = multer.diskStorage({
- destination: function (req, file, cb) {
-  // Specify the directory where uploaded files will be stored
-  cb(null, 'uploads/');
- },
- filename: function (req, file, cb) {
-  // Generate a unique filename to avoid overwriting files
-  cb(null, Date.now() + '-' + file.originalname);
- }
+ destination: function (req, file, cb) {
+  // Specify the directory where uploaded files will be stored
+  cb(null, 'uploads/');
+ },
+ filename: function (req, file, cb) {
+  // Generate a unique filename to avoid overwriting files
+  cb(null, Date.now() + '-' + file.originalname);
+ }
 });
 
 const upload = multer({ storage: storage });
@@ -20,7 +21,7 @@ const upload = multer({ storage: storage });
 // Create a new category (POST) - now handles file upload
 router.post('/', upload.single('image'), controller.createCategory);
 
-//  Add the upload middleware to the PUT route to handle image uploads
+//  Add the upload middleware to the PUT route to handle image uploads
 router.put('/:id', upload.single('image'), controller.updateCategory);
 
 // All other routes remain the same
