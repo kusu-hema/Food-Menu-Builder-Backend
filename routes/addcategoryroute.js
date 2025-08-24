@@ -1,4 +1,5 @@
-// File: routes/categoryRoutes.js
+// File: routes/addcategoryroute.js
+
 const express = require('express');
 const router = express.Router();
 const controller = require('../controller/addcategorycontroller');
@@ -18,15 +19,25 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-// Create a new category (POST) - now handles file upload
+// All API routes for categories
+// Note: The bulk-import route does not use the multer middleware as it handles JSON data, not files.
+
+// Create a new category (POST) - handles image upload
 router.post('/', upload.single('image'), controller.createCategory);
 
-//  Add the upload middleware to the PUT route to handle image uploads
+// Update an existing category (PUT) - handles image upload
 router.put('/:id', upload.single('image'), controller.updateCategory);
 
-// All other routes remain the same
+// New route for bulk import of categories (POST) - handles JSON data
+router.post('/bulk-import', controller.bulkImportCategories);
+
+// Retrieve all categories (GET)
 router.get('/', controller.getCategories);
+
+// Retrieve a single category by ID (GET)
 router.get('/:id', controller.getCategoryById);
+
+// Delete a category by ID (DELETE)
 router.delete('/:id', controller.deleteCategory);
 
 module.exports = router;
