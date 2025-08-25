@@ -70,6 +70,12 @@ module.exports = {
 
 
 
+
+
+
+
+
+
 // const model = require('../models/authmodel');
 
 // const signup = async (req, res) => {

@@ -1,6 +1,6 @@
-const model = require('../models/addproductmodel');
-// ✅ This line is the critical fix.
+const model = require('../models/addproductmodel'); 
 const db = require('../config/dbconn');
+
 
 // Get all products
 const getProducts = async (req, res) => {

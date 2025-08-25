@@ -26,9 +26,9 @@ module.exports = router;
 
 // const express = require('express');
 // const router = express.Router();
-// const controller = require('../controller/authcontroller'); // ✅ path should be correct
+// const controller = require('../controller/authcontroller'); //  path should be correct
 
-// router.post('/signup', controller.signup); // ✅ matches exported name
+// router.post('/signup', controller.signup); //  matches exported name
 
 // module.exports = router;
 

@@ -1,15 +1,12 @@
-const { Pool } = require('pg');  // Capital P, correct import
-const dotenv = require('dotenv'); // optional if you’re using .env
-
-// You can call dotenv.config() here if using .env
-// dotenv.config();
+const { Pool } = require('pg');   
+const dotenv = require('dotenv');
 
 const pool = new Pool({ //  Instantiate using Pool
   user: 'postgres',
   host: 'localhost',
   database: 'postgres',
   password: '9848698',
-  port: 5432, // use your correct port
+  port: 5432,  
 });
 
 module.exports = pool; //  Export the pool object
