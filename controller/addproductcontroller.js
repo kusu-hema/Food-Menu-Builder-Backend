@@ -1,6 +1,6 @@
-// File: controllers/productController.js
-
 const model = require('../models/addproductmodel');
+// ✅ This line is the critical fix.
+const db = require('../config/dbconn');
 
 // Get all products
 const getProducts = async (req, res) => {
@@ -85,10 +85,52 @@ const deleteProduct = async (req, res) => {
   }
 };
 
+// New function to handle bulk import of products
+const bulkImportProducts = (req, res) => {
+    const products = req.body;
+
+    if (!Array.isArray(products) || products.length === 0) {
+        return res.status(400).json({ message: 'Invalid data format. Expected an array of products.' });
+    }
+
+    // Map the keys from your Excel sheet to your database columns
+    // We are now specifically looking for 'product', 'category', and 'action' from the normalized keys in the frontend
+    const values = products.map(prod => [
+        prod.sno,
+        prod.product,
+        prod.category,
+        prod.action
+    ]);
+
+    // Use ON CONFLICT (sno) DO UPDATE to handle existing records
+    // PostgreSQL does not support ON DUPLICATE KEY UPDATE.
+    const sql = `
+        INSERT INTO products (sno, product, category, action)
+        VALUES ($1, $2, $3, $4)
+        ON CONFLICT (sno) DO UPDATE
+        SET product = EXCLUDED.product, category = EXCLUDED.category, action = EXCLUDED.action
+    `;
+
+    // To perform a bulk insert, you need to loop through the products and execute the query for each one.
+    // The node-pg library does not have a simple bulk insert function.
+    // I am updating the code to loop through products and perform individual inserts
+    // which will not show a syntax error
+    Promise.all(values.map(v => db.query(sql, v)))
+        .then(() => {
+            res.status(200).json({ message: `${products.length} products imported successfully.` });
+        })
+        .catch(err => {
+            console.error('Error importing data:', err);
+            res.status(500).json({ message: 'Error importing data.', error: err.message });
+        });
+};
+
 module.exports = {
   getProducts,
   getProductById,
   createProduct,
   updateProduct,
   deleteProduct,
+  // Make sure to include the new function in the exports object
+  bulkImportProducts,
 };
