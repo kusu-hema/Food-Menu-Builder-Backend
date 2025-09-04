@@ -20,10 +20,10 @@ const upload = multer({ storage: storage });
 // Create a new product (POST) - now handles file upload
 router.post('/', upload.single('image'), controller.createProduct);
 
-// ✅ Add the upload middleware to the PUT route to handle image uploads
+// Add the upload middleware to the PUT route to handle image uploads
 router.put('/:id', upload.single('image'), controller.updateProduct);
 
-// ✅ New route for bulk product import from Excel
+// New route for bulk product import from Excel
 router.post('/bulk-import', controller.bulkImportProducts);
 
 // All other routes remain the same
