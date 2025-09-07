@@ -4,7 +4,7 @@
 const model = require('../models/addcategorymodel');
 // const db = require('../db');  
 
-
+  
 // Get all categories
 const getCategories = async (req, res) => {
   try {
