@@ -13,7 +13,6 @@ module.exports = pool; //  Export the pool object
 
 
 
-
 // const {pool}= require('pg');
 // const dotenv = require('dotenv')
 
