@@ -9,7 +9,7 @@ const pool = new Pool({ //  Instantiate using Pool
   port: 5432,  
 });
 
-module.exports = pool; //  Export the pool object
+module.exports = pool; //  Export the pool object 
 
 
 
