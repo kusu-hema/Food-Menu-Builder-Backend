@@ -1,4 +1,4 @@
-// File: controllers/addcategorycontroller.js
+ 
 
 
 const model = require('../models/addcategorymodel');
