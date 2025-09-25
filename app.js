@@ -3,9 +3,11 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 
 const app = express();
+
+// Import the new category routes
 const customerRoutes = require("./routes/authroute");
 const productRoutes = require("./routes/addproductroute");
-const categoryRoutes = require("./routes/addcategoryroute"); // Import the new category routes
+const categoryRoutes = require("./routes/addcategoryroute"); 
 
 
 // INVOICE API 
@@ -13,7 +15,6 @@ const menu_productRoutes = require("./routes/menuproductroute");
 // const menu_categoryRoutes = require("./routes/categoryroute");
 // const invoiceRoutes = require("./routes/invoiceroute");
 // const contextRoutes = require("./routes/contextroute");
-
 
 
 // Middleware
@@ -34,8 +35,6 @@ app.use('/api/menu_products', menu_productRoutes);
 // app.use('/api/menu_categories', menu_categoryRoutes);
 // app.use('/api/invoices', invoiceRoutes);
 // app.use('/api/contexts', contextRoutes);
-
-
 
 
 // Health check route (optional)
