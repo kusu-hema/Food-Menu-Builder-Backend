@@ -1,10 +1,7 @@
- 
-
-
 const model = require('../models/addcategorymodel');
 // const db = require('../db');  
 
-  
+
 // Get all categories
 const getCategories = async (req, res) => {
   try {
@@ -78,7 +75,6 @@ const updateCategory = async (req, res) => {
     res.status(500).json({ message: 'Internal Server Error' });
   }
 };
-
 
 
 
