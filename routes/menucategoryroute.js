@@ -9,10 +9,10 @@ const controller = require("../controller/menucategorycontroller");
 // Get all
 router.get("/", controller.getCategories); 
 
-// Get by ID
+// Get by ID  
 router.get("/:id", controller.getCategoryById);
 
-// Create
+// Post api 
 router.post("/", controller.createCategory);      
 
 // Update 
