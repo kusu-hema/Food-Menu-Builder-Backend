@@ -7,12 +7,15 @@ class UserModel {
     return rows;
   }
 
+  // select query 
   async getUserById(id) {
     const query = 'SELECT * FROM customers WHERE id = $1';
     const { rows } = await pool.query(query, [id]);
     return rows[0];
   }
 
+
+  // create new user 
   async createUser({ name, phone, start, end_date, type, location, status }) {
     const query = `
       INSERT INTO customers (name, phone, start, end_date, type, location, status)
@@ -24,6 +27,7 @@ class UserModel {
     return rows[0];
   }
 
+  // update user
   async updateUser(id, { name, phone, start, end_date, type, location, status }) {
     const query = `
       UPDATE customers
@@ -35,7 +39,8 @@ class UserModel {
     const { rows } = await pool.query(query, values);
     return rows[0];
   }
-
+ 
+  // delete user 
   async deleteUser(id) {
     const query = 'DELETE FROM customers WHERE id = $1';
     await pool.query(query, [id]);
