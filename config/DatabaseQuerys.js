@@ -39,10 +39,95 @@
 
 
 
+// #Invoice .............................................................................//
+
+
+// CREATE TABLE IF NOT EXISTS categories (
+//   id SERIAL PRIMARY KEY,
+//   sno INT,
+//   category_name VARCHAR(150) NOT NULL,
+//   created_at TIMESTAMP DEFAULT now()
+// );
+
+// CREATE TABLE IF NOT EXISTS products (
+//   id SERIAL PRIMARY KEY,
+//   category_id INT REFERENCES categories(id) ON DELETE SET NULL,
+//   product VARCHAR(200) NOT NULL,
+//   image VARCHAR(255),
+//   created_at TIMESTAMP DEFAULT now()
+// );
+
+// CREATE TABLE IF NOT EXISTS menus (
+//   id SERIAL PRIMARY KEY,
+//   customer_name VARCHAR(200),
+//   contact VARCHAR(30),
+//   place VARCHAR(200),
+//   date DATE,
+//   created_at TIMESTAMP DEFAULT now()
+// );
+
+// CREATE TABLE IF NOT EXISTS menu_contexts (
+//   id SERIAL PRIMARY KEY,
+//   menu_id INT REFERENCES menus(id) ON DELETE CASCADE,
+//   event_date DATE,
+//   meal VARCHAR(50),
+//   members INT,
+//   buffet VARCHAR(50),
+//   created_at TIMESTAMP DEFAULT now()
+// );
+
+// CREATE TABLE IF NOT EXISTS menu_categories (
+//   id SERIAL PRIMARY KEY,
+//   context_id INT REFERENCES menu_contexts(id) ON DELETE CASCADE,
+//   category_name VARCHAR(150) NOT NULL,
+//   created_at TIMESTAMP DEFAULT now()
+// );
+
+// CREATE TABLE IF NOT EXISTS menu_items (
+//   id SERIAL PRIMARY KEY,
+//   category_id INT REFERENCES menu_categories(id) ON DELETE CASCADE,
+//   item_name VARCHAR(200) NOT NULL,
+//   created_at TIMESTAMP DEFAULT now()
+// );
+
+// CREATE TABLE IF NOT EXISTS invoices (
+//   id SERIAL PRIMARY KEY,
+//   menu_id INT REFERENCES menus(id) ON DELETE CASCADE,
+//   subtotal NUMERIC(12,2) DEFAULT 0,
+//   gst NUMERIC(12,2) DEFAULT 0,
+//   grand_total NUMERIC(12,2) DEFAULT 0,
+//   advance NUMERIC(12,2) DEFAULT 0,
+//   balance NUMERIC(12,2) DEFAULT 0,
+//   lead_counters NUMERIC(12,2) DEFAULT 0,
+//   water_bottles NUMERIC(12,2) DEFAULT 0,
+//   cooking_charges NUMERIC(12,2) DEFAULT 0,
+//   labour_charges NUMERIC(12,2) DEFAULT 0,
+//   transport_charges NUMERIC(12,2) DEFAULT 0,
+//   created_at TIMESTAMP DEFAULT now()
+// );
+
+                                                                                                                        
+// CREATE INDEX IF NOT EXISTS idx_menu_date ON menus(date);
+// CREATE INDEX IF NOT EXISTS idx_context_menu ON menu_contexts(menu_id);
+// CREATE INDEX IF NOT EXISTS idx_cat_context ON menu_categories(context_id);
+// CREATE INDEX IF NOT EXISTS idx_item_category ON menu_items(category_id);
+
+
+
 
 
 
 // Invoice .............................................................................//
+
+
+// DROP TABLE menu_items CASCADE;
+// DROP TABLE menu_contexts CASCADE;
+// DROP TABLE invoices CASCADE;
+// DROP TABLE clients CASCADE;
+// DROP TABLE menu_products CASCADE;
+// DROP TABLE categories CASCADE;
+
+
 
 // CREATE TABLE categories (
 //     id SERIAL PRIMARY KEY,
