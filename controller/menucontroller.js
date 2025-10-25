@@ -1,6 +1,6 @@
 const model = require('../models/menumodel');
 
-// ✅ Get all menus
+//  Get all menus
 const getMenus = async (req, res) => {
   try {
     const menus = await model.getAllMenus();
@@ -11,7 +11,7 @@ const getMenus = async (req, res) => {
   }
 };
 
-// ✅ Get one menu by ID
+//  Get one menu by ID
 const getMenuById = async (req, res) => {
   try {
     const menu = await model.getMenuById(req.params.id);
@@ -23,7 +23,7 @@ const getMenuById = async (req, res) => {
   }
 };
 
-// ✅ Create new menu
+//  Create new menu
 const createMenu = async (req, res) => {
   try {
     const newMenu = await model.createMenu(req.body);
@@ -34,7 +34,7 @@ const createMenu = async (req, res) => {
   }
 };
 
-// ✅ Update menu
+//  Update menu
 const updateMenu = async (req, res) => {
   try {
     const updatedMenu = await model.updateMenu(req.params.id, req.body);
@@ -46,7 +46,7 @@ const updateMenu = async (req, res) => {
   }
 };
 
-// ✅ Delete menu
+//  Delete menu
 const deleteMenu = async (req, res) => {
   try {
     await model.deleteMenu(req.params.id);

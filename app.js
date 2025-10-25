@@ -13,6 +13,7 @@ const categoryRoutes = require("./routes/addcategoryroute");
 
 // INVOICE API 
 const menuRoutes = require("./routes/menuroute");
+const menucontextRoutes = require("./routes/menucontextsroute");
 
 
 // Middleware
@@ -25,11 +26,12 @@ app.use('/uploads', express.static('uploads'));
 // Base routes for your 'APIs'
 app.use('/api/customers', customerRoutes);
 app.use('/api/products', productRoutes);
-app.use('/api/categories', categoryRoutes); // Use the new category routes
-
+app.use('/api/categories', categoryRoutes);  
 
 // INVOICE API 
 app.use('/api/menus', menuRoutes);
+app.use('/api/menucontext', menucontextRoutes);
+
 
 
 // Health check route (optional)
