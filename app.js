@@ -36,7 +36,9 @@ app.use('/api/menucontext', menucontextRoutes);
 
 // Health check route (optional)
 app.get("/", (req, res) => {
- res.send("Customer, Product, and Category APIs are running");
+//  res.send("Customer, Product, and Category APIs are running");
+ res.send(" Backend is running");
+
 });
 
 // Start the server

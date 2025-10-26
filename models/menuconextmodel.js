@@ -3,47 +3,47 @@ const pool = require('../config/dbconn');
 class MenuModel {
 
   //  Get all menus
-  async getAllUsers() {
-    const query = 'SELECT * FROM menus ORDER BY id DESC';
+  async getAllMenuContext() {
+    const query = 'SELECT * FROM menu_contexts ORDER BY id DESC';
     const { rows } = await pool.query(query);
     return rows;
   }
 
   //  Get a menu by ID
   async getMenuContextById(id) {
-    const query = 'SELECT * FROM menus WHERE id = $1';
+    const query = 'SELECT * FROM menu_contexts WHERE id = $1';
     const { rows } = await pool.query(query, [id]);
     return rows[0];
   }
 
   //  Create new menu
-  async updateMenuContext({ customer_name, contact, place, date }) {
+  async updateMenuContext({ menu_id, event_date, meal, members, buffet  }) {
     const query = `
-      INSERT INTO menus (customer_name, contact, place, date)
-      VALUES ($1, $2, $3, $4)
+      INSERT INTO menu_contexts ( menu_id, event_date, meal, members, buffet )
+      VALUES ($1, $2, $3, $4, $5)
       RETURNING *;
     `;
-    const values = [customer_name, contact, place, date];
+    const values = [ menu_id, event_date, meal, members, buffet];
     const { rows } = await pool.query(query, values);
     return rows[0];
   }
 
   // Update existing menu by ID
-  async updateMenuContextByI(id, { customer_name, contact, place, date }) {
+  async updateMenuContextByI(id, {  menu_id, event_date, meal, members, buffet }) {
     const query = `
-      UPDATE menus 
-      SET customer_name = $1, contact = $2, place = $3, date = $4
-      WHERE id = $5
+      UPDATE menu_contexts 
+      SET menu_id = $1, event_date = $2, meal = $3, members = $4, buffet = $5
+      WHERE id = $6
       RETURNING *;
     `;
-    const values = [customer_name, contact, place, date, id];
+    const values = [menu_id, event_date, meal, members, buffet];
     const { rows } = await pool.query(query, values);
     return rows[0];
   }
 
   //  Delete a menu
   async deleteMenuContext(id) {
-    const query = 'DELETE FROM menus WHERE id = $1';
+    const query = 'DELETE FROM menu_contexts WHERE id = $1';
     await pool.query(query, [id]);
     return true;
   }
