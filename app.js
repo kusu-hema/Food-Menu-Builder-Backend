@@ -14,6 +14,7 @@ const categoryRoutes = require("./routes/addcategoryroute");
 // INVOICE API 
 const menuRoutes = require("./routes/menuroute");
 const menucontextRoutes = require("./routes/menucontextsroute");
+// const menuitemsRoutes = require("./routes/menuitemsroute");
 
 
 // Middleware
@@ -31,6 +32,7 @@ app.use('/api/categories', categoryRoutes);
 // INVOICE API 
 app.use('/api/menus', menuRoutes);
 app.use('/api/menucontext', menucontextRoutes);
+// app.use('/api/menuitems', menuitemsRoutes)
 
 
 
