@@ -2,33 +2,19 @@ const express = require('express');
 const router = express.Router();
 const controller = require ('../controller/menucontextcontroller');
 
+// Read all users (GET)
 router.get('/', controller.getMenuContext);
 
+// Read one user by ID (GET)
 router.get('/:id', controller.getMenuContextById);
 
+// Create new user (POST)
 router.post('/', controller.updateMenuContext);
 
+// Update user (PUT)
 router.put('/:id', controller.updateMenuContextById);
 
+// Delete user (DELETE)
 router.delete ('/:id', controller.deleteMenuContext);
 
 module.exports = router;
-
-
-
-// const express = require('express');
-// const router = express.Router();
-// const controller = require('../controller/menucontroller');
-
-// // CRUD API endpoints
-// router.get('/', controller.getMenus);
-
-// router.get('/:id', controller.getMenuById);
-
-// router.post('/', controller.createMenu);
-
-// router.put('/:id', controller.updateMenu);
-
-// router.delete('/:id', controller.deleteMenu);
-
-// module.exports = router;
