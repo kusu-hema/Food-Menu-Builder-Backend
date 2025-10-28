@@ -1,9 +1,9 @@
 const model = require('../models/menuitemsmodel');
 
 //Get all menus
-const getMenus = async (req, res) => {
+const getMenuItems = async (req, res) => {
     try{
-        const menus = await model.getAllMenus();
+        const menus = await model.getAllMenuItems();
         res.status(200).json(menus);
     }
     catch (error){
@@ -14,9 +14,9 @@ const getMenus = async (req, res) => {
 }
 
 
-const getMenuById = async (req,res) => {
+const getMenuItemsById = async (req,res) => {
     try{
-        const menu = await model.getMenuById(req.params.id);
+        const menu = await model.getMenuItemsById(req.params.id);
         if(!menu) return res.status(404).json ({message: 'Menu not found '});
         res.status (200).json(menu);
     }
@@ -26,9 +26,9 @@ const getMenuById = async (req,res) => {
     }
 }
  
-const createMenu = async (req,res) =>{
+const createMenuItems = async (req,res) =>{
     try {
-        const newMenu = await model.createMenu(req.body);
+        const newMenu = await model.createMenuItems(req.body);
         res.status (201).json (newMenu);
     }
     catch (error){
@@ -38,9 +38,9 @@ const createMenu = async (req,res) =>{
 }
 
 
-const updateMenu = async (req, res) => {
+const updateMenuItems = async (req, res) => {
     try{
-        const updateMenu = await model.updateMenu(req.params.id, req.body);
+        const updateMenu = await model.updateMenuItems(req.params.id, req.body);
         if (!updatedMenu) return res. status (404).json ({ message : 'Menu not found ' });
         res.status(200).json (updatedMenu);
     }
@@ -51,9 +51,9 @@ const updateMenu = async (req, res) => {
 }
 
 
-const deleteMenu = async ( req, res ) =>{
+const deleteMenuItem = async ( req, res ) =>{
     try {
-        await model.deleteMenu (req.params.id);
+        await model.deleteMenuItem (req.params.id);
         res.status(200).json ({ message : 'Menu deleted successfully' });
         }
     catch (error){
@@ -67,9 +67,9 @@ const deleteMenu = async ( req, res ) =>{
  
 
 module.exports = {
-  getMenus,
-  getMenuById,
-  createMenu,
-  updateMenu,
-  deleteMenu,
+  getMenuItems,
+  getMenuItemsById,
+  createMenuItems,
+  updateMenuItems,
+  deleteMenuItem,
 };

@@ -1,37 +1,37 @@
 const pool = require ('../config/dbconn');
 
 class MenuModel { 
-    async getAllMenus() {
-        const query = 'SELECT * FROM menus ORDER BY id DESC';
+    async getAllMenuItems() {
+        const query = 'SELECT * FROM menu_items ORDER BY id DESC';
         const { rows } = await pool.query (query);
         return rows;
     }
 
-    async getMenuById (id){
-        const query = 'SELECT * FROM menus WHERE id = $1';
+    async getMenuItemsById (id){
+        const query = 'SELECT * FROM menu_items WHERE id = $1';
         const { rows } = await pool.query(query, [id]);
         return rows[0];
     }
 
-    async createMenu ({ customer_name, contact, place, date })
+    async createMenuItems ({ customer_name, contact, place, date })
     {
         const query= `
-        INSERT INTO menus (customer_name, contact, place, date)
-        VALUES ($1, $2, $3, $4)
+        INSERT INTO menu_items (category_id, item_name)
+        VALUES ($1, $2)
         RETURNING*; `;
-        const values = [customer_name, contact , place , date];
+        const values = [category_id, item_name];
         const{rows} = await pool.query(query, values);
         return rows[0];
 
     }
 
-    async updateMenu (id, { customer_name, contact, place, date }){
+    async updateMenuItems (id, {category_id, item_name}){
         const query = `
-        UPDATE menus 
-        SET customer_name = $1, contact = $2, place = $3, date = $4
-        WHERE id = $5
+        UPDATE menu_items 
+        SET  category_id, item_name
+        WHERE id = $3
         RETURNING *; `;
-        const Values = [customer_name,contact,place,date];
+        const Values = [category_id, item_name];
         const { rows } = await pool.query(query, values);
         return rows [0];
     }
@@ -40,8 +40,8 @@ class MenuModel {
  
 
   //  Delete a menu
-  async deleteMenu(id) {
-    const query = 'DELETE FROM menus WHERE id = $1';
+  async deleteMenuItem(id) {
+    const query = 'DELETE FROM menu_items WHERE id = $1';
     await pool.query(query, [id]);
     return true;
   }
