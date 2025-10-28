@@ -1,6 +1,6 @@
 const pool = require ('../config/dbconn');
 
-class MenuModel { 
+class MenuItemModel { 
     async getAllMenuItems() {
         const query = 'SELECT * FROM menu_items ORDER BY id DESC';
         const { rows } = await pool.query (query);
@@ -47,4 +47,4 @@ class MenuModel {
   }
 
 }
-module.exports = new MenuModel();
+module.exports = new MenuItemModel();

@@ -1,7 +1,10 @@
 const pool = require('../config/dbconn');
 
+// Renamed the class from CategoryModel to ProductModel
 class UserModel {
+  // Renamed the method to getAllProducts
   async getAllUsers() {
+    // Select all columns from the new table schema
     const query = 'SELECT * FROM customers';
     const { rows } = await pool.query(query);
     return rows;
@@ -9,6 +12,7 @@ class UserModel {
 
   // select query 
   async getUserById(id) {
+    // Select a single record by the primary key `sno`
     const query = 'SELECT * FROM customers WHERE id = $1';
     const { rows } = await pool.query(query, [id]);
     return rows[0];
@@ -17,6 +21,7 @@ class UserModel {
 
   // create new user 
   async createUser({ name, phone, start, end_date, type, location, status }) {
+    // Insert a new record using the new column names
     const query = `
       INSERT INTO customers (name, phone, start, end_date, type, location, status)
       VALUES ($1, $2, $3, $4, $5, $6, $7)
@@ -29,6 +34,7 @@ class UserModel {
 
   // update user
   async updateUser(id, { name, phone, start, end_date, type, location, status }) {
+    // Update a record using the new column names
     const query = `
       UPDATE customers
       SET name = $1, phone = $2, start = $3, end_date = $4, type = $5, location = $6, status = $7
@@ -42,6 +48,7 @@ class UserModel {
  
   // delete user 
   async deleteUser(id) {
+    // Delete a record by `sno`
     const query = 'DELETE FROM customers WHERE id = $1';
     await pool.query(query, [id]);
     return true;

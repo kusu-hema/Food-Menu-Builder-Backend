@@ -7,16 +7,16 @@ const controller = require('../controller/menucontroller');
 // Read all users (GET)
 router.get('/', controller.getMenus);
 
-// get api by id 
+// Read one user by ID (GET)
 router.get('/:id', controller.getMenuById);
 
-// post api 
+// Create new user (POST)
 router.post('/', controller.createMenu);
 
-// update api by id 
+// Update user (PUT)
 router.put('/:id', controller.updateMenu);
 
-// delete api 
+// Delete user (DELETE)
 router.delete('/:id', controller.deleteMenu);
 
 module.exports = router;

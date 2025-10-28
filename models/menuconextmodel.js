@@ -1,9 +1,10 @@
 const pool = require('../config/dbconn');
 
-class MenuModel {
+class MenuContextModel {
 
   //  Get all menus
   async getAllMenuContext() {
+    // Select all columns from the new table schema 
     const query = 'SELECT * FROM menu_contexts ORDER BY id DESC';
     const { rows } = await pool.query(query);
     return rows;
@@ -11,6 +12,7 @@ class MenuModel {
 
   //  Get a menu by ID
   async getMenuContextById(id) {
+    // Select a single record by the primary key `sno`
     const query = 'SELECT * FROM menu_contexts WHERE id = $1';
     const { rows } = await pool.query(query, [id]);
     return rows[0];
@@ -18,6 +20,7 @@ class MenuModel {
 
   //  Create new menu
   async updateMenuContext({ menu_id, event_date, meal, members, buffet  }) {
+    // Insert a new record using the new column names
     const query = `
       INSERT INTO menu_contexts ( menu_id, event_date, meal, members, buffet )
       VALUES ($1, $2, $3, $4, $5)
@@ -49,4 +52,4 @@ class MenuModel {
   }
 }
 
-module.exports = new MenuModel();
+module.exports = new MenuContextModel();
