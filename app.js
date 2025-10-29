@@ -9,14 +9,11 @@ const customerRoutes = require("./routes/authroute");
 const productRoutes = require("./routes/addproductroute");
 const categoryRoutes = require("./routes/addcategoryroute"); 
 
-
-
 // INVOICE API 
 const menuRoutes = require("./routes/menuroute");
 const menucontextRoutes = require("./routes/menucontextsroute");
 const menuitemsRoutes = require("./routes/menuitemsroute");
 const menuinvoiceRoutes = require("./routes/menuinvoiceroute")
-
 
 // Middleware
 app.use(cors());

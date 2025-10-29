@@ -27,11 +27,11 @@ class MenuInvoiceModel{
     async updateMenuItems (id ,  { menu_id, subtotal, gst, grand_total,advance,balance,lead_counters,water_bottles, cooking_charges,labour_charges, transport_charges }) {
        const query = `
        UPDATE invoices 
-       SET menu_id, subtotal, gst, grand_total, advance, balance, lead_counters , water_bottles, cooking_charges, labour_charges, transport_charges
+       SET menu_id = $1, subtotal = $2, gst = $3, grand_total = $4, advance = $5, balance = 6, lead_counters = $7, water_bottles = $8, cooking_charges =, $9, labour_charges = $10, transport_charges =$ 11
        WHERE ID = $12
        RETURNING * ;
        `;
-       const Values = [ menu_id, subtotal, gst, grand_total, advance, balance, lead_counters, water_bottles, cooking_charges, labour_charges, transport_charges ];
+       const values = [ menu_id, subtotal, gst, grand_total, advance, balance, lead_counters, water_bottles, cooking_charges, labour_charges, transport_charges, id];
        const { rows } = await pool.query(query, values);
        return rows [0];
     }

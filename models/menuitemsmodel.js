@@ -13,7 +13,7 @@ class MenuItemModel {
         return rows[0];
     }
 
-    async createMenuItems ({ customer_name, contact, place, date })
+    async createMenuItems ({ category_id, item_name })
     {
         const query= `
         INSERT INTO menu_items (category_id, item_name)
@@ -28,23 +28,22 @@ class MenuItemModel {
     async updateMenuItems (id, {category_id, item_name}){
         const query = `
         UPDATE menu_items 
-        SET  category_id, item_name
+        SET  category_id = $1, item_name = $2
         WHERE id = $3
-        RETURNING *; `;
-        const Values = [category_id, item_name];
+        RETURNING *; 
+        `;
+        const values = [category_id, item_name , id];
         const { rows } = await pool.query(query, values);
         return rows [0];
     }
 
  
- 
-
-  //  Delete a menu
-  async deleteMenuItem(id) {
-    const query = 'DELETE FROM menu_items WHERE id = $1';
-    await pool.query(query, [id]);
-    return true;
-  }
+    //  Delete a menu
+    async deleteMenuItem(id) {
+        const query = 'DELETE FROM menu_items WHERE id = $1';
+        await pool.query(query, [id]);
+        return true;
+    }
 
 }
 module.exports = new MenuItemModel();
