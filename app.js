@@ -13,7 +13,9 @@ const categoryRoutes = require("./routes/addcategoryroute");
 const menuRoutes = require("./routes/menuroute");
 const menucontextRoutes = require("./routes/menucontextsroute");
 const menuitemsRoutes = require("./routes/menuitemsroute");
-const menuinvoiceRoutes = require("./routes/menuinvoiceroute")
+const menuinvoiceRoutes = require("./routes/menuinvoiceroute");
+const menucategoriesRoutes = require("./routes/menucategoriesroute");
+
 
 // Middleware
 app.use(cors());
@@ -30,8 +32,9 @@ app.use('/api/categories', categoryRoutes);
 // INVOICE API 
 app.use('/api/menus', menuRoutes);
 app.use('/api/menucontext', menucontextRoutes);
-app.use('/api/menuitems', menuitemsRoutes)
-app.use('/api/menuinvoice', menuinvoiceRoutes)
+app.use('/api/menuitems', menuitemsRoutes);
+app.use('/api/menuinvoice', menuinvoiceRoutes);
+app.use('/api/menucategories', menucategoriesRoutes);
 
 
 

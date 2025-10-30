@@ -32,14 +32,14 @@ class MenuContextModel {
   }
 
   // Update existing menu by ID
-  async updateMenuContextByI(id, {  menu_id, event_date, meal, members, buffet }) {
+  async updateMenuContextById(id, {  menu_id, event_date, meal, members, buffet }) {
     const query = `
       UPDATE menu_contexts 
       SET menu_id = $1, event_date = $2, meal = $3, members = $4, buffet = $5
       WHERE id = $6
       RETURNING *;
     `;
-    const values = [menu_id, event_date, meal, members, buffet];
+    const values = [menu_id, event_date, meal, members, buffet, id ];
     const { rows } = await pool.query(query, values);
     return rows[0];
   }
