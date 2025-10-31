@@ -1,9 +1,9 @@
 const model = require ('../models/menucategoriesmodel');
 
 // Get all menus
-const getMenuContext = async (req, res) =>{
+const getMenuCatergories = async (req, res) =>{
     try{
-        const menus = await model.getAllMenuContext();
+        const menus = await model.getAllMenuCategories();
         res.status(200).json(menus);
     }catch (error){
         console.error ('Error fetching menus:', error);
@@ -14,9 +14,9 @@ const getMenuContext = async (req, res) =>{
 
 // Get one menu by ID 
 
-const getMenuById = async (req, res) => {
+const getMenuCategoriesById = async (req, res) => {
     try{
-        const menu = await model.getMenuContextById(req.params.id);
+        const menu = await model.getMenuCategoriesById(req.params.id);
         if (!menu) return res.status(404).json({ message: "Menu not found "});
         res.status(200).json (menu);
     }
@@ -27,9 +27,9 @@ const getMenuById = async (req, res) => {
 }
 
 //  Get one menu by ID
-const getMenuContextById = async (req, res) => {
+const createMenuCategories = async (req, res) => {
   try {
-    const menu = await model.getMenuContextById(req.params.id);
+    const menu = await model.createMenuCategories(req.params.id);
     if (!menu) return res.status(404).json({ message: 'Menu not found' });
     res.status(200).json(menu);
   } catch (error) {   
@@ -38,21 +38,11 @@ const getMenuContextById = async (req, res) => {
   }
 };
 
-//  Create new menu
-const updateMenuContext = async (req, res) => {
-  try {
-    const newMenu = await model.updateMenuContext(req.body);
-    res.status(201).json(newMenu);
-  } catch (error) {
-    console.error('Error creating menu:', error);
-    res.status(500).json({ message: 'Internal Server Error' });
-  }
-};
 
 //  Update menu
-const updateMenuContextById = async (req, res) => {
+const updateMenuCategories = async (req, res) => {
   try {
-    const updatedMenu = await model.updateMenuContextById(req.params.id, req.body);
+    const updatedMenu = await model.updateMenuCategories(req.params.id, req.body);
     if (!updatedMenu) return res.status(404).json({ message: 'Menu not found' });
     res.status(200).json(updatedMenu);
   } catch (error) {
@@ -62,9 +52,9 @@ const updateMenuContextById = async (req, res) => {
 };
 
 //  Delete menu
-const deleteMenuContext = async (req, res) => {
+const deleteMenuCategories = async (req, res) => {
   try {
-    await model.deleteMenuContext(req.params.id);
+    await model.deleteMenuCategories(req.params.id);
     res.status(200).json({ message: 'Menu deleted successfully' });
   } catch (error) {
     console.error('Error deleting menu:', error);
@@ -73,9 +63,9 @@ const deleteMenuContext = async (req, res) => {
 };
 
 module.exports = {
-  getMenuContext,
-  getMenuContextById,
-  updateMenuContext,
-  updateMenuContextById,
-  deleteMenuContext,
+  getMenuCatergories,
+  getMenuCategoriesById,
+  createMenuCategories,
+  updateMenuCategories,
+  deleteMenuCategories,
 };

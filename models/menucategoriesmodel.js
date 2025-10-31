@@ -3,50 +3,50 @@ const pool = require ('../config/dbconn');
 class MenuContextModel {
     
     // Get all Menus
-    async getAllMenuContext (){
+    async getAllMenuCategories (){
       // select all columns from the new table schema
-      const query = 'select * FROM menu_contexts ORDER BY Id DESC';
+      const query = 'select * FROM menu_categories ORDER BY Id DESC';
       const { rows } = await pool.query(query);
       return rows;
     }
 
     // Get a menu by ID
-    async getMenuContextById(id){
+    async getMenuCategoriesById(id){
     // select a single record by the primary key `sno`
-    const query = `SELECT * FROM menu_contexts WHERE id = $1`;
+    const query = `SELECT * FROM menu_categories WHERE id = $1`;
     const { rows } = await pool.query(query, [id]);
     return rows [0];
     }
     
     // Create new menu
-    async updateMenuContext ({ menu_id, event_date, meal, members, buffet }) {
+    async createMenuCategories ({ context_id, category_name }) {
     // Inserrt a new record using the new column names 
     const query = ` 
-    INSERT INTO menu_contexts ( menu_id , event_date, meal, members, buffet )
-    VALUES ($1, $2, $3, $4, $5)
+    INSERT INTO menu_categories (context_id, category_name)
+    VALUES ($1, $2)
     RETURNING*;
     `;
-    const values = [ menu_id, event_date, meal, members, buffet];
+    const values = [context_id, category_name];
     const { rows } = await pool.query( query, values);
     return rows [0];
     }
 
 
     //Update existing menu by ID
-    async updateMenuContextById (id , { menu_id , event_date, meal, members, buffet }){
+    async updateMenuCategories (id , { context_id, category_name }){
         const query = `
-        UPDATE menu_contexts
-        SET menu_id = $1, event_date = $2, meal = $3, members = $4, buffet = $5
-        WHERE id = $6 
+        UPDATE menu_categories
+        SET  context_id = $1, category_name = $2
+        WHERE id = $3 
         RETURNING *;
         `;
-        const values = [menu_id, event_date, meal, members, buffet , id];
+        const values = [ context_id, category_name, id];
         const { rows } = await pool.query(query, values);
         return rows [0];
     }
 
     // Delte a menu 
-    async deleteMenuContext(id) {
+    async deleteMenuCategories(id) {
         const query = 'DELETE FROM menu_contets WHERE id = $1';
         await pool.query(query, [id]);
         return true;
