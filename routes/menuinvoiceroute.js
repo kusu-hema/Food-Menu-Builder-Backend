@@ -8,16 +8,16 @@ const controller = require ('../controller/menuinvoicecontroller');
 router.get ('/', controller.getMenuInvoice);
 
 // Read one user by ID (GET)
-router.get('/Id', controller.getMenuInvoiceById);
+router.get('/:id', controller.getMenuInvoiceById);
 
 // Create new user (POST)
 router.post('/', controller.createMenuInvoice);
 
 // Update user (PUT)
-router.put('/Id', controller.updateMenuInvoice);
+router.put('/:id', controller.updateMenuInvoice);
 
 // Delete user (DELETE)
-router.delete('/Id', controller.deleteMenuInvoice);
+router.delete('/:id', controller.deleteMenuInvoice);
 
 module.exports = router; 
 
