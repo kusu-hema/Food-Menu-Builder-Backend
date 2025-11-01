@@ -40,7 +40,7 @@ const createMenuItems = async (req,res) =>{
 
 const updateMenuItems = async (req, res) => {
     try{
-        const updateMenu = await model.updateMenuItems(req.params.id, req.body);
+        const updatedMenu = await model.updateMenuItems(req.params.id, req.body);
         if (!updatedMenu) return res. status (404).json ({ message : 'Menu not found ' });
         res.status(200).json (updatedMenu);
     }

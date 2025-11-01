@@ -16,6 +16,8 @@ const menuitemsRoutes = require("./routes/menuitemsroute");
 const menuinvoiceRoutes = require("./routes/menuinvoiceroute");
 const menucategoriesRoutes = require("./routes/menucategoriesroute");
 
+const menupdfinvoiceRoutes = require("./routes/menupdfinvoiceroute");
+
 
 // Middleware
 app.use(cors());
@@ -23,6 +25,10 @@ app.use(bodyParser.json());
 
 // This is the critical line to serve images from the 'uploads' directory
 app.use('/uploads', express.static('uploads'));
+
+
+// 👇 NEW: This serves your generated PDF invoices!
+app.use('/invoices', express.static('invoices'));
 
 // Base routes for your 'APIs'
 app.use('/api/customers', customerRoutes);
@@ -35,6 +41,8 @@ app.use('/api/menucontext', menucontextRoutes);
 app.use('/api/menuitems', menuitemsRoutes);
 app.use('/api/menuinvoice', menuinvoiceRoutes);
 app.use('/api/menucategories', menucategoriesRoutes);
+
+app.use('/api/menupdfinvoice',menupdfinvoiceRoutes)
 
 
 
