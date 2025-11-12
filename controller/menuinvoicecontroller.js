@@ -23,16 +23,29 @@ const getMenuInvoiceById = async (req,res) =>{
     }
 }
 
-const createMenuInvoice = async (req, res) =>{
-    try{
-        const newMenu = await model.createMenuInvoice(req.body);
-        res.status (201).json (newMenu);
-    }
-    catch(error) {
-        console.error('Error creating menu:', error);
-        res.status(500).json ({ message : 'Internal Server Error '});
-    }
-}
+// const createMenuInvoice = async (req, res) =>{
+//     try{
+//         const newMenu = await model.createMenuInvoice(req.body);
+//         res.status (201).json (newMenu);
+//     }
+//     catch(error) {
+//         console.error('Error creating menu:', error);
+//         res.status(500).json ({ message : 'Internal Server Error '});
+//     }
+// }
+
+const createMenuInvoice = async (req, res) => {
+  try {
+    // Merge query params and body, so either can be used
+    const data = { ...req.query, ...req.body };
+    const newMenu = await model.createMenuInvoice(data);
+    res.status(201).json(newMenu);
+  } catch (error) {
+    console.error('Error creating menu:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+};
+
 
 
 const updateMenuInvoice = async ( req, res) => {

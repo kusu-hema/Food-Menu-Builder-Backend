@@ -23,6 +23,7 @@ class MenuInvoiceModel{
        const { rows } = await pool.query(query, values);
        return rows[0];
     }
+    
 
     async updateMenuInvoice (id ,  { menu_id, subtotal, gst, grand_total,advance,balance,lead_counters,water_bottles, cooking_charges,labour_charges, transport_charges }) {
        const query = `
