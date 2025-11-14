@@ -1,21 +1,21 @@
 const pool = require('../config/dbconn');
 
 class MenuModel {
-  //  Get all menus
+  // Get all menus
   async getAllMenus() {
     const query = 'SELECT * FROM menus ORDER BY id DESC';
     const { rows } = await pool.query(query);
     return rows;
   }
 
-  //  Get a single menu by ID
+  // Get a single menu by ID
   async getMenuById(id) {
     const query = 'SELECT * FROM menus WHERE id = $1';
     const { rows } = await pool.query(query, [id]);
     return rows[0];
   }
 
-  //  Create a new menu
+  // Create a new menu
   async createMenu({ customer_name, contact, place, date }) {
     const query = `
       INSERT INTO menus (customer_name, contact, place, date)
@@ -23,11 +23,19 @@ class MenuModel {
       RETURNING *;
     `;
     const values = [customer_name, contact, place, date];
-    const { rows } = await pool.query(query, values);
-    return rows[0];
+
+    try {
+      const { rows } = await pool.query(query, values);
+      return rows[0];
+    } catch (error) {
+      if (error.code === '23505') { // unique violation
+        throw new Error('Phone number already exists');
+      }
+      throw error;
+    }
   }
 
-  //  Update an existing menu
+  // Update an existing menu
   async updateMenu(id, { customer_name, contact, place, date }) {
     const query = `
       UPDATE menus
@@ -36,11 +44,19 @@ class MenuModel {
       RETURNING *;
     `;
     const values = [customer_name, contact, place, date, id];
-    const { rows } = await pool.query(query, values);
-    return rows[0];
+
+    try {
+      const { rows } = await pool.query(query, values);
+      return rows[0];
+    } catch (error) {
+      if (error.code === '23505') { // unique violation
+        throw new Error('Phone number already exists');
+      }
+      throw error;
+    }
   }
 
-  //  Delete a menu
+  // Delete a menu
   async deleteMenu(id) {
     const query = 'DELETE FROM menus WHERE id = $1';
     await pool.query(query, [id]);
