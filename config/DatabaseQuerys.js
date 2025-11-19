@@ -115,6 +115,73 @@
 
 
 
+// joinss..............
+
+// SELECT
+//     m.id AS menu_id,
+//     m.customer_name,
+//     m.contact,
+//     m.place,
+//     m.date AS booking_date,
+//     -- Invoice fields (Use LEFT JOIN to prevent dropping rows without an invoice)
+//     i.subtotal, 
+//     i.gst, 
+//     i.grand_total, 
+//     i.advance, 
+//     i.balance,
+//     i.lead_counters, 
+//     i.water_bottles, 
+//     i.cooking_charges, 
+//     i.labour_charges, 
+//     i.transport_charges,
+//     -- Aggregate Contexts, Categories, and Items
+//     COALESCE(
+//         json_agg(
+//             json_build_object(
+//                 'context_id', mc.id,
+//                 'event_date', mc.event_date,
+//                 'meal', mc.meal,
+//                 'members', mc.members,
+//                 'buffet', mc.buffet,
+//                 'categories', (
+//                     SELECT
+//                         COALESCE(
+//                             json_agg(
+//                                 json_build_object(
+//                                     'category_id', mcat.id,
+//                                     'category_name', mcat.category_name,
+//                                     'items', (
+//                                         SELECT
+//                                             COALESCE(json_agg(mi.item_name), '[]'::json) -- Ensures [] instead of null
+//                                         FROM
+//                                             menu_items mi
+//                                         WHERE
+//                                             mi.category_id = mcat.id
+//                                     )
+//                                 )
+//                             ), '[]'::json)
+//                     FROM
+//                         menu_categories mcat
+//                     WHERE
+//                         mcat.context_id = mc.id
+//                 )
+//             )
+//         ) FILTER (WHERE mc.id IS NOT NULL), 
+//         '[]'::json) AS menu_contexts -- Handles cases where there are no contexts at all
+// FROM
+//     menus m
+// LEFT JOIN  -- Use LEFT JOIN
+//     invoices i ON m.id = i.menu_id
+// LEFT JOIN  -- Use LEFT JOIN
+//     menu_contexts mc ON m.id = mc.menu_id
+// WHERE
+//     m.id = 12
+// GROUP BY
+//     m.id, m.customer_name, m.contact, m.place, m.date,
+//     i.subtotal, i.gst, i.grand_total, i.advance, i.balance, 
+//     i.lead_counters, i.water_bottles, i.cooking_charges, i.labour_charges, i.transport_charges;
+
+
 
 
 // Invoice .............................................................................//

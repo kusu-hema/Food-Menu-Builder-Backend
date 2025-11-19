@@ -27,7 +27,7 @@ app.use(bodyParser.json());
 app.use('/uploads', express.static('uploads'));
 
 
-// 👇 NEW: This serves your generated PDF invoices!
+//  NEW: This serves your generated PDF invoices!
 app.use('/invoices', express.static('invoices'));
 
 // Base routes for your 'APIs'

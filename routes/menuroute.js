@@ -4,19 +4,23 @@ const controller = require('../controller/menucontroller');
 
 // CRUD API endpoints
 
-// Read all users (GET)
+// Read all menus (GET /api/menus)
 router.get('/', controller.getMenus);
 
-// Read one user by ID (GET)
+// NEW: Read full menu/invoice details by ID (GET /api/menus/details/:id)
+// The :id here is what gets captured by req.params.id in the controller
+router.get('/details/:id', controller.getFullMenuDetails); 
+
+// Read one menu by ID (GET /api/menus/:id)
 router.get('/:id', controller.getMenuById);
 
-// Create new user (POST)
+// Create new menu (POST)
 router.post('/', controller.createMenu);
 
-// Update user (PUT)
+// Update menu (PUT)
 router.put('/:id', controller.updateMenu);
 
-// Delete user (DELETE)
+// Delete menu (DELETE)
 router.delete('/:id', controller.deleteMenu);
 
 module.exports = router;
